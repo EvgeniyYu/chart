@@ -33,14 +33,13 @@ void MainWindow::slotOpen()
     if (!sFileName.isEmpty())
     {
         chartWindow = new ChartWindow(sFileName.toStdString());
-        if (chartWindow->init())
+        chartWindow->init();
+
+        bool res = chartWindow->start();
+        if (res)
         {
-            bool res = chartWindow->start();
-            if (res)
-            {
-                delete chartWindow;
-                chartWindow = NULL;
-            }
+            delete chartWindow;
+            chartWindow = NULL;
         }
     }
 }
