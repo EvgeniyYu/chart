@@ -1,5 +1,5 @@
 Application: Measurements visualization 
-Developed on Ubuntu 20.04 using Qt5/QtCreator/C++. 
+Developed on Ubuntu 20.04 using Qt5/QtCreator/xlib/C++. 
 
 Functionality description:
 1 To execute, enter command './chart'

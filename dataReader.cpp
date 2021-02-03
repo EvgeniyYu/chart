@@ -12,7 +12,6 @@ DataReader::DataReader(const std::string& _sFileName): sFileName(_sFileName)
 
 DataReader::~DataReader()
 {
-
 }
 
 int getCountLines(const std::string& fname)
@@ -23,7 +22,7 @@ int getCountLines(const std::string& fname)
                       std::istreambuf_iterator<char>(), '\n');
 }
 
-bool DataReader::readFile(Result &result)
+bool DataReader::readFile()
 {
     if (points.size())
         points.clear();
@@ -35,7 +34,7 @@ bool DataReader::readFile(Result &result)
     fs.open(sFileName.c_str(), std::ios::in);
     if (!fs.is_open())
     {
-        result.error = FILE_OPEN_ERROR;
+        sHeader = "ERROR: File cannot be opened\r\n";
         return false;
     }
 
@@ -53,7 +52,7 @@ bool DataReader::readFile(Result &result)
         {
             //display only three lines of header
             if (num_line <= 3)
-                sHeader += line + "\n";
+                sHeader += line + "\r\n";
             continue;
         }
 
@@ -64,8 +63,7 @@ bool DataReader::readFile(Result &result)
         if (!(iss >> a >> b))
         {
             fs.close();
-            result.error = LINE_ERROR;
-            result.line = num_line;
+            sHeader += "ERROR: Line error: " + std::to_string(num_line) + "\r\n";
             return false;
         }
         else
@@ -81,15 +79,3 @@ bool DataReader::readFile(Result &result)
     return true;
 }
 
-std::string DataReader::getError(ERROR err)
-{
-    switch (err)
-    {
-        case FILE_OPEN_ERROR:
-            return "File cannot be open";
-        case LINE_ERROR:
-            return "Line error";
-        default:
-            return "";
-    }
-}

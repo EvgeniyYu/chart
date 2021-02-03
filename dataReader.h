@@ -4,18 +4,6 @@
 #include <vector>
 #include <string>
 
-enum ERROR {FILE_OPEN_ERROR, LINE_ERROR};
-
-struct Result
-{
-    ERROR error;
-    int line;
-    Result(): line(0) {}
-    Result(ERROR _error, int _line = 0):
-        error(_error), line(_line) {}
-    ~Result() {}
-};
-
 
 struct Point
 {
@@ -28,13 +16,12 @@ struct Point
 
 class DataReader
 {
-private:
+protected:
     std::string sFileName;
 protected:
     std::string sHeader;
     std::vector<Point> points;
-    bool readFile(Result &result);
-    std::string getError(ERROR err);
+    bool readFile();
 public:
     DataReader(const std::string& _sFileName);
     ~DataReader();

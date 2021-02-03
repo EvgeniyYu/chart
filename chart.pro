@@ -5,7 +5,8 @@
 TEMPLATE = app
 TARGET = chart
 INCLUDEPATH += .
-QT += gui widgets charts
+LIBS += -L/usr/X11/lib -lX11
+QT += gui widgets
 
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings
@@ -19,6 +20,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # Input
-HEADERS += dataReader.h mainwindow.h windowChart.h
+HEADERS += dataReader.h mainwindow.h \
+    cwindow.h
 FORMS += mainwindow.ui
-SOURCES += dataReader.cpp main.cpp mainwindow.cpp windowChart.cpp
+SOURCES += dataReader.cpp main.cpp mainwindow.cpp \
+    cwindow.cpp

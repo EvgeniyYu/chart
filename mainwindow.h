@@ -3,7 +3,9 @@
 
 #include <QMainWindow>
 #include <QCloseEvent>
-#include "windowChart.h"
+//#include "windowChart.h"
+#include "cwindow.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -17,6 +19,7 @@ public:
     ~MainWindow();
 private:
     Ui::MainWindow *ui;
+    ChartWindow* chartWindow;
 private slots:
     void slotOpen();
     void slotExit();

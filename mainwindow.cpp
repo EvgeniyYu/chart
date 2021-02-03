@@ -4,7 +4,7 @@
 #include <QVBoxLayout>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "windowChart.h"
+#include "cwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -32,7 +32,16 @@ void MainWindow::slotOpen()
                                                      ,&sFilter);
     if (!sFileName.isEmpty())
     {
-        WindowChart *wChart = new WindowChart(sFileName);
+        chartWindow = new ChartWindow(sFileName.toStdString());
+        if (chartWindow->init())
+        {
+            bool res = chartWindow->start();
+            if (res)
+            {
+                delete chartWindow;
+                chartWindow = NULL;
+            }
+        }
     }
 }
 
